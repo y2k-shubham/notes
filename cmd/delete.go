@@ -22,7 +22,7 @@ var deleteCommand = &cobra.Command{
 		case 1:
 			noteID := os.Args[2]
 			noteid, err := strconv.ParseInt(noteID, 10, 64)
-			if err != nil{
+			if err != nil {
 				fmt.Println("ERROR")
 			}
 			err = db.DeleteNote("Default", uint64(noteid))
@@ -30,7 +30,6 @@ var deleteCommand = &cobra.Command{
 			emoji.Println(" :pencil2: Note deleted from Default")
 
 		}
-
 
 	},
 }
