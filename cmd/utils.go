@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"github.com/noculture/notes/models"
 	"log"
 	"os/user"
 	"path"
+
+	"github.com/noculture/notes/models"
 )
 
 /**
@@ -14,6 +15,7 @@ import (
  * return: models.Datastore
  */
 func setupDatabase() models.Datastore {
+	var database models.Datastore
 	// determine current user's home directory and build path for a '.notebooks.db' file there
 	usr, err := user.Current()
 	if err != nil {
@@ -22,10 +24,9 @@ func setupDatabase() models.Datastore {
 	notebook := path.Join(usr.HomeDir, ".notebooks.db")
 
 	// create a bolt-db file (.notebooks.db) or use the existing one
-	database, err := models.GetOrCreateDB(notebook)
+	database, err = models.GetOrCreateDB(notebook)
 	if err != nil {
 		log.Panic(err)
 	}
-
 	return database
 }
